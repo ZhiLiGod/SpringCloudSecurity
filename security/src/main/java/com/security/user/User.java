@@ -3,6 +3,7 @@ package com.security.user;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @Entity
@@ -17,10 +18,12 @@ public class User {
   @Column(name = "name", nullable = false)
   private String name;
 
-  @Column(name = "username")
+  @NotBlank(message = "Username cannot be null")
+  @Column(name = "username", unique = true, nullable = false)
   private String username;
 
-  @Column(name = "password")
+  @NotBlank(message = "Password cannot be null")
+  @Column(name = "password", nullable = false)
   private String password;
 
 }
