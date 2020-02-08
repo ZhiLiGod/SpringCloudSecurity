@@ -9,3 +9,9 @@ spring:
     username: root
     password: lizhimysql
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate.format_sql: true
+    open-in-view: false
