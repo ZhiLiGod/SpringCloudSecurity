@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: user-api
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/security?autoReconnect=true&characterEncoding=utf8
+    username: root
+    password: lizhimysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate.format_sql: true
+    open-in-view: false

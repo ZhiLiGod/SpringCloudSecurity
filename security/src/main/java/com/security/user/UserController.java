@@ -31,7 +31,7 @@ public class UserController {
 
   }
 
-  @GetMapping("/{id}")
+  @GetMapping("/{id}/info")
   public User get(@PathVariable Long id) {
     return new User();
   }
@@ -43,8 +43,7 @@ public class UserController {
     List data = jdbcTemplate.queryForList(sql);
 
     // security way
-    List<User> users = userRepository.findByName(name);
-    return data;
+    return userRepository.findByName(name);
   }
 
 }
