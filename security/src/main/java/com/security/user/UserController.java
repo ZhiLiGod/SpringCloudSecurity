@@ -13,6 +13,9 @@ public class UserController {
   @Autowired
   private JdbcTemplate jdbcTemplate;
 
+  @Autowired
+  private UserRepository userRepository;
+
   @PostMapping
   public User create(@RequestBody User user) {
     return user;
@@ -38,6 +41,9 @@ public class UserController {
     // injection issue
     String sql = "SELECT id, name FROM user WHERE name = '" + name +"'";
     List data = jdbcTemplate.queryForList(sql);
+
+    // security way
+    List<User> users = userRepository.findByName(name);
     return data;
   }
 
