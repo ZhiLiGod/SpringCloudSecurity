@@ -3,6 +3,7 @@ package com.security.filter;
 import com.security.log.AuditLog;
 import com.security.log.AuditLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
+@Order(3)
 public class AuditLogInterceptor extends HandlerInterceptorAdapter {
 
   @Autowired
