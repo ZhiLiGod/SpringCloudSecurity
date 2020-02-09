@@ -1,2 +1,6 @@
 cloud-security.iml
 .idea/
+
+orderservice/target/
+priceservice/target/
+auth/target/
