@@ -1,5 +1,6 @@
 package com.security.service.impl;
 
+import com.lambdaworks.crypto.SCryptUtil;
 import com.security.dto.UserInfo;
 import com.security.service.UserService;
 import com.security.user.User;
@@ -20,6 +21,7 @@ public class UserServiceImpl implements UserService {
   public UserInfo create(UserInfo userInfo) {
     User user = new User();
     BeanUtils.copyProperties(userInfo, user);
+    user.setPassword(SCryptUtil.scrypt(user.getPassword(), 32768, 8, 1));
     user = userRepository.save(user);
     userInfo.setId(user.getId());
 

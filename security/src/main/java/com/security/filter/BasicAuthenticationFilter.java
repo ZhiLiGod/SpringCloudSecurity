@@ -1,5 +1,6 @@
 package com.security.filter;
 
+import com.lambdaworks.crypto.SCryptUtil;
 import com.security.user.User;
 import com.security.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,7 @@ public class BasicAuthenticationFilter extends OncePerRequestFilter {
 
       User user = userRepository.findByUsername(username);
 
-      if (user != null && StringUtils.equals(password, user.getPassword())) {
+      if (user != null && SCryptUtil.check(password, user.getPassword())) {
         log.info("LOGIN");
         httpServletRequest.setAttribute("user", user);
       }
