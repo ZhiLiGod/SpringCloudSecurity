@@ -1,5 +1,10 @@
 server:
   port: 8080
+  # support https
+#  ssl:
+#    key-store: classpath:zhi.key
+#    key-store-password: password
+#    key-password: password
 
 spring:
   application:

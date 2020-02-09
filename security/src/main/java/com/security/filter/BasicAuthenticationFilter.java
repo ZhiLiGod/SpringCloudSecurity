@@ -6,6 +6,7 @@ import com.security.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -18,6 +19,7 @@ import java.io.IOException;
 
 @Slf4j
 @Component
+@Order(2)
 public class BasicAuthenticationFilter extends OncePerRequestFilter {
 
   @Autowired
