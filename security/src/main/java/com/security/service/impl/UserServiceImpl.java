@@ -48,6 +48,11 @@ public class UserServiceImpl implements UserService {
     return null;
   }
 
+  @Override
+  public UserInfo login(UserInfo user) {
+    return user;
+  }
+
   private UserInfo userInfoConverter(User user) {
     UserInfo userInfo = new UserInfo();
     BeanUtils.copyProperties(user, userInfo);

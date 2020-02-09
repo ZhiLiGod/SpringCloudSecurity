@@ -1,6 +1,7 @@
 package com.security.filter;
 
-import com.security.user.User;
+import com.security.dto.UserInfo;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -14,25 +15,29 @@ import javax.servlet.http.HttpServletResponse;
 @Order(4)
 public class ACLInterceptor extends HandlerInterceptorAdapter {
 
+  private String[] permitUrls = new String[] {"/login/session"};
+
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
     Boolean result = Boolean.TRUE;
 
-    User user = (User) request.getAttribute("user");
-    if (user == null) {
-      response.setContentType("text/plain");
-      response.getWriter().write("need authentication");
-      response.setStatus(HttpStatus.UNAUTHORIZED.value());
-      result = Boolean.FALSE;
-    } else {
-      String method = request.getMethod();
-
-      if (!hasPermissions(method, user.getPermissions())) {
+    if (!ArrayUtils.contains(permitUrls, request.getRequestURI())) {
+      UserInfo user = (UserInfo) request.getSession().getAttribute("user");
+      if (user == null) {
         response.setContentType("text/plain");
-        response.getWriter().write("forbidden");
-        response.setStatus(HttpStatus.FORBIDDEN.value());
+        response.getWriter().write("need authentication");
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
         result = Boolean.FALSE;
+      } else {
+        String method = request.getMethod();
+
+        if (!hasPermissions(method, user.getPermissions())) {
+          response.setContentType("text/plain");
+          response.getWriter().write("forbidden");
+          response.setStatus(HttpStatus.FORBIDDEN.value());
+          result = Boolean.FALSE;
+        }
       }
     }
 

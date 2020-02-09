@@ -16,4 +16,6 @@ public interface UserService {
 
   List<UserInfo> getUsers(String name);
 
+  UserInfo login(UserInfo user);
+
 }

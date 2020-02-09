@@ -16,4 +16,6 @@ public class UserInfo {
   @NotBlank(message = "Password cannot be null")
   private String password;
 
+  private String permissions;
+
 }

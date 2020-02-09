@@ -37,7 +37,7 @@ public class UserController {
 
   @GetMapping("/{id}/info")
   public UserInfo get(@PathVariable Long id, HttpServletRequest request) {
-    User user = (User) request.getAttribute("user");
+    UserInfo user = (UserInfo) request.getSession().getAttribute("user");
 
     if (user == null || !user.getId().equals(id)) {
       throw new RuntimeException("Authentication Failed");
