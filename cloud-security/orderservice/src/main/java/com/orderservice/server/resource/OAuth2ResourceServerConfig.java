@@ -1,6 +1,7 @@
 package com.orderservice.server.resource;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -14,8 +15,10 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
   public void configure(HttpSecurity http) throws Exception {
     // @formatter:off
     http.authorizeRequests()
-        .antMatchers("/no-auth")
-        .permitAll()
+        .antMatchers(HttpMethod.POST)
+        .access("#oauth2.hasScope('write')")
+        .antMatchers(HttpMethod.GET)
+        .access("#oauth2.hasScope('read')")
         .anyRequest().authenticated();
     // @formatter:on
   }
