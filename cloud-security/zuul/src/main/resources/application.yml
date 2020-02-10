@@ -4,6 +4,17 @@ server:
 spring:
   application:
     name: gateway-zuul
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/security?autoReconnect=true&characterEncoding=utf8
+    username: root
+    password: lizhimysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate.format_sql: true
+    open-in-view: false
 
 zuul:
   routes:
@@ -13,3 +24,13 @@ zuul:
       url: http://localhost:8080
   # by default, if header has Authorization, zuul is not going to redirect
   sensitive-headers:
+  ratelimit:
+    enabled: true
+    repository: jpa
+    default-policy-list:
+    - limit: 2
+      quota: 1
+      refresh-interval: 3 #2 requests in 3 sec, total duration should not greater than 1 sec
+      type:
+        - url
+        - httpmethod

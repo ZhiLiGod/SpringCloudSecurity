@@ -5,7 +5,6 @@ import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
@@ -45,6 +44,9 @@ public class AuthorizationFilter extends ZuulFilter {
           log.info("audit log update fail 403");
           handleError(403, context);
         }
+
+        context.addZuulRequestHeader("username", tokenInfo.getUser_name());
+
       } else {
         if (!StringUtils.startsWith(request.getRequestURI(), "/token")) {
           log.info("audit log update fail 401");
@@ -57,7 +59,7 @@ public class AuthorizationFilter extends ZuulFilter {
   }
 
   private boolean hasPermission(TokenInfo tokenInfo, HttpServletRequest request) {
-    return RandomUtils.nextInt() % 2 == 0;
+    return Boolean.TRUE;
   }
 
   private void handleError(int status, RequestContext context) {

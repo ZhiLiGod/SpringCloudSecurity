@@ -1,9 +1,7 @@
 package com.orderservice.order;
 
-import com.orderservice.server.resource.CustomUserDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,8 +22,8 @@ public class OrderController {
   }
 
   @GetMapping("/{id}")
-  public OrderInfo getById(@PathVariable final Long id, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-    log.info("Logged in user: {}", customUserDetails.getUsername());
+  public OrderInfo getById(@PathVariable final Long id, @RequestHeader String username) {
+    log.info("Logged in user: {}", username);
     OrderInfo orderInfo = new OrderInfo();
     orderInfo.setOrderId(id);
 
