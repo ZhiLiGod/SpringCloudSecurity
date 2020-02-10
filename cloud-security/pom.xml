@@ -16,6 +16,7 @@
         <module>priceservice</module>
         <module>auth</module>
         <module>zuul</module>
+        <module>admin</module>
     </modules>
 
     <parent>
