@@ -1,0 +1,15 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: gateway-zuul
+
+zuul:
+  routes:
+    token:
+      url: http://localhost:8090
+    order:
+      url: http://localhost:8080
+  # by default, if header has Authorization, zuul is not going to redirect
+  sensitive-headers:

@@ -15,6 +15,7 @@
         <module>orderservice</module>
         <module>priceservice</module>
         <module>auth</module>
+        <module>zuul</module>
     </modules>
 
     <parent>
