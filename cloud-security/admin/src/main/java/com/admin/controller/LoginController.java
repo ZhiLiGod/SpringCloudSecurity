@@ -18,7 +18,7 @@ public class LoginController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.OK)
-  public void login(@RequestBody Credential credential, HttpServletRequest request) {
+  public String login(@RequestBody Credential credential, HttpServletRequest request) {
 
     String oauthServiceUrl = "http://localhost:9000/token/oauth/token";
 
@@ -36,6 +36,8 @@ public class LoginController {
     ResponseEntity<TokenInfo> response = restTemplate.exchange(oauthServiceUrl, HttpMethod.POST, entity, TokenInfo.class);
 
     request.getSession().setAttribute("token", response.getBody());
+
+    return "User Logged In";
   }
 
 }
