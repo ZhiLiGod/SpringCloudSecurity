@@ -4,3 +4,9 @@ server:
 spring:
   application:
     name: admin-server
+
+zuul:
+  routes:
+    api:
+      url: http://gateway-server:9000
+  sensitive-headers:
