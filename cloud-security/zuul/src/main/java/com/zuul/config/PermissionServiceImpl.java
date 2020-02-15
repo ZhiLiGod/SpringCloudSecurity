@@ -19,7 +19,7 @@ public class PermissionServiceImpl implements PermissionService {
     log.info("Authentication: {}", ReflectionToStringBuilder.toString(authentication));
     // this part should check db and see authorizes
 
-    if (authentication instanceof AnonymousAuthenticationToken) {
+    if (authentication instanceof AnonymousAuthenticationToken) {// no token
       throw new AccessTokenRequiredException(null);
     }
     return true;

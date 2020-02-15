@@ -7,6 +7,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
+import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 
 @Configuration
 @EnableResourceServer
@@ -36,6 +37,7 @@ public class GatewaySecurityConfig extends ResourceServerConfigurerAdapter {
     // @formatter:off
     http
         // 验证之前
+        .addFilterBefore(new GatewayRateLimitFilter(), SecurityContextPersistenceFilter.class)// first one in Spring Security
         .addFilterBefore(new GatewayAuditLogFilter(), ExceptionTranslationFilter.class)
         .authorizeRequests()
         .antMatchers("/token/**").permitAll()
