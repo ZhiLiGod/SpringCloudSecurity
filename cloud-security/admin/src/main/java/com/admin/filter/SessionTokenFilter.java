@@ -71,7 +71,6 @@ public class SessionTokenFilter extends ZuulFilter {
           requestContext.getResponse().setContentType(MediaType.APPLICATION_JSON_VALUE);
         }
 
-
       }
 
       requestContext.addZuulRequestHeader("Authorization", "bearer " + tokenValue);
