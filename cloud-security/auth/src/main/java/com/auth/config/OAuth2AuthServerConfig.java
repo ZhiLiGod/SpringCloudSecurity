@@ -3,6 +3,7 @@ package com.auth.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,6 +15,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
 
 import javax.sql.DataSource;
@@ -44,7 +46,9 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
 
   private JwtAccessTokenConverter jwtTokenEnhancer() {
     JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-    converter.setSigningKey("123456");
+    // converter.setSigningKey("123456");
+    KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("zhi.key"), "lizhi1214".toCharArray());
+    converter.setKeyPair(keyStoreKeyFactory.getKeyPair("zhi"));
     return converter;
   }
 
