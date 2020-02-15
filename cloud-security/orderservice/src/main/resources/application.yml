@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: order-service
+  cloud:
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8080
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/security?autoReconnect=true&characterEncoding=utf8
     username: root
@@ -15,3 +20,17 @@ spring:
     properties:
       hibernate.format_sql: true
     open-in-view: false
+
+security:
+  oauth2:
+    client:
+      client-id: orderService
+      client-secret: 123456
+    resource:
+      jwt:
+        key-uri: http://auth-server:8090/oauth/token_key
+
+sentinel:
+  zookeeper:
+    address: 127.0.0.1:2181
+    path: /sentinel_rule_config

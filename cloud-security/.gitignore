@@ -4,3 +4,5 @@ cloud-security.iml
 orderservice/target/
 priceservice/target/
 auth/target/
+zuul/target/
+admin/target/
