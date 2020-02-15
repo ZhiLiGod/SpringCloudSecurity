@@ -18,10 +18,14 @@ public class GatewaySecurityConfig extends ResourceServerConfigurerAdapter {
   @Autowired
   private GatewayAccessDeniedHandler gatewayAccessDeniedHandler;
 
+  @Autowired
+  private GatewayAuthenticationEntryPoint gatewayAuthenticationEntryPoint;
+
   @Override
   public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
     // @formatter:off
     resources
+        .authenticationEntryPoint(gatewayAuthenticationEntryPoint)
         .accessDeniedHandler(gatewayAccessDeniedHandler)
         .expressionHandler(gatewayWebSecurityExpressionHandler);
     // @formatter:on
