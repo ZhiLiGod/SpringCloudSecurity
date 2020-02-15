@@ -1,5 +1,6 @@
 package com.orderservice.order;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ public class OrderController {
 //  @PreAuthorize("#hasRole('ROLE_ADMIN')")
   @PreAuthorize("#oauth2.hasScope('write')")// has to have write in scope
   @GetMapping("/{id}")
+  @SentinelResource("getOrder")
   public OrderInfo getById(@PathVariable final Long id, @AuthenticationPrincipal String username) {
     log.info("Logged in user: {}", username);
     OrderInfo orderInfo = new OrderInfo();

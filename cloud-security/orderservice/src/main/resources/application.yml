@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: order-service
+  cloud:
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8080
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/security?autoReconnect=true&characterEncoding=utf8
     username: root
