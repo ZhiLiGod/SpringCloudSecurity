@@ -22,6 +22,8 @@ zuul:
       url: http://localhost:8090
     order:
       url: http://localhost:8080
+    user:
+      url:
   # by default, if header has Authorization, zuul is not going to redirect
   sensitive-headers:
   ratelimit:
