@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Slf4j
 @RestController
@@ -45,7 +47,7 @@ public class LoginController {
   }
 
   @GetMapping("/oauth/callback")
-  public void callback(@RequestParam String code, String state, HttpServletRequest request) {
+  public void callback(@RequestParam String code, String state, HttpServletRequest request, HttpServletResponse httpServletResponse) throws IOException {
     log.info("state: {}", state);
 
     String oauthServiceUrl = "http://localhost:9000/token/oauth/token";
@@ -62,11 +64,11 @@ public class LoginController {
     HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
     ResponseEntity<TokenInfo> response = restTemplate.exchange(oauthServiceUrl, HttpMethod.POST, entity, TokenInfo.class);
 
-    request.getSession().setAttribute("token", response.getBody());
+    request.getSession().setAttribute("token", response.getBody().init());
 
     log.info(response.getBody().getAccess_token());
 
-
+    httpServletResponse.sendRedirect("/");
   }
 
   @GetMapping("/me")
