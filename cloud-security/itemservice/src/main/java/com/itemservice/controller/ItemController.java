@@ -27,4 +27,9 @@ public class ItemController {
     return itemInfo;
   }
 
+  @GetMapping("/no-auth")
+  public String noAuth() {
+    return "NO AUTH";
+  }
+
 }
