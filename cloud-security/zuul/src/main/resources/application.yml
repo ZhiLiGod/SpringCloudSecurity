@@ -42,6 +42,7 @@ security:
     resource:
       jwt:
         key-uri: http://auth-server:8090/oauth/token_key
+
     client:
       client-id: gateway
       client-secret: 123456

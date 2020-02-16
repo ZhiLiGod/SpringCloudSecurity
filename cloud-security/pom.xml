@@ -17,6 +17,7 @@
         <module>auth</module>
         <module>zuul</module>
         <module>admin</module>
+        <module>itemservice</module>
     </modules>
 
     <parent>

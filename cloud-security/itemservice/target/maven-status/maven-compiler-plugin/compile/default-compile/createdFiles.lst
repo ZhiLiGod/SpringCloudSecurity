@@ -1,0 +1,5 @@
+com\itemservice\controller\ItemController.class
+com\itemservice\App.class
+com\itemservice\model\ItemInfo.class
+com\itemservice\config\OAuth2RestTemplateConfig.class
+com\itemservice\model\PriceInfo.class

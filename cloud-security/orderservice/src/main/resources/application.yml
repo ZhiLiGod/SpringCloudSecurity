@@ -29,6 +29,7 @@ security:
     resource:
       jwt:
         key-uri: http://auth-server:8090/oauth/token_key
+      # key-uri: http://devenv.invoicefair.club:44628/auth/oauth/token_key
 
 sentinel:
   zookeeper:
